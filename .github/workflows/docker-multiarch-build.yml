@@ -7,6 +7,11 @@ on:
         description: "Docker Hub repository (e.g., lesposito87/poorman-aws-playground)"
         required: true
         type: string
+    secrets:
+      DOCKERHUB_USERNAME:
+        required: true
+      DOCKERHUB_TOKEN:
+        required: true
 
 jobs:
   build:
