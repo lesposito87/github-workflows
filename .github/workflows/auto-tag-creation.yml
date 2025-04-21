@@ -6,7 +6,7 @@ on:
       - main
 
 permissions:
-  contents: write  # needed to push the new tag
+  contents: write
 
 jobs:
   auto-tag:
@@ -15,43 +15,35 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # needed to fetch tags and full history
+          fetch-depth: 0
 
       - name: Get latest tag
         id: get_tag
         run: |
-          TAG=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)
-          echo "Latest tag: $TAG"
-
-          if [[ -z "$TAG" ]]; then
-            TAG="v1.0.0"
+          latest_tag=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n 1)
+          if [ -z "$latest_tag" ]; then
+            latest_tag="v1.0.0"
           fi
-
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "latest_tag=$latest_tag" >> $GITHUB_ENV
 
       - name: Bump patch version
         id: bump_tag
         run: |
-          TAG=${{ steps.get_tag.outputs.tag }}
-          VERSION=${TAG#v}
-          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
-          NEW_TAG="v$MAJOR.$MINOR.$((PATCH + 1))"
-
-          echo "new_tag=$NEW_TAG" >> $GITHUB_OUTPUT
+          version="${latest_tag#v}"
+          IFS='.' read -r major minor patch <<< "$version"
+          new_tag="v$major.$minor.$((patch + 1))"
+          echo "new_tag=$new_tag" >> $GITHUB_ENV
 
       - name: Get last commit message (PR title)
-        id: commit_msg
         run: |
-          MSG=$(git log -1 --pretty=%s)
-          echo "msg=$MSG" >> $GITHUB_OUTPUT
+          commit_msg=$(git log -1 --pretty=%s)
+          echo "commit_msg=$commit_msg" >> $GITHUB_ENV
 
-      - name: Create new tag with PR title
+      - name: Create and push tag
         run: |
-          NEW_TAG=${{ steps.bump_tag.outputs.new_tag }}
-          MESSAGE=${{ steps.commit_msg.outputs.msg }}
-
           git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@lesposito87.noreply.github.com"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          git tag -a "$NEW_TAG" -m "$MESSAGE"
-          git push origin "$NEW_TAG"
+          git tag -a "$new_tag" -m "$commit_msg"
+          git push origin "$new_tag"
+
