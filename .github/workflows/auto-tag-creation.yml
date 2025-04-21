@@ -1,13 +1,4 @@
-
-      - name: Create new tag and push
-        run: |
-          NEW_TAG=${{ steps.bump_tag.outputs.new_tag }}
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@lesposito87.noreply.github.com"
-          git tag "$NEW_TAG"
-          git push origin "$NEW_TAG"
-
-name: Auto Tag on Main Push
+name: Auto Tag Creation on Main Push
 
 on:
   push:
