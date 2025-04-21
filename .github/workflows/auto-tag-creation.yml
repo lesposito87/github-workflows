@@ -46,4 +46,3 @@ jobs:
 
           git tag -a "$new_tag" -m "$commit_msg"
           git push origin "$new_tag"
-
