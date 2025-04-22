@@ -113,7 +113,7 @@ jobs:
 
 ## Auto-Update Ansible Roles README with "docsible" (`docsible.yml`) <a name="docsible"/>
 
-This reusable GitHub Actions workflow automatically updates your `README.md` file using [`docsible`](https://github.com/melezhik/docsible), a documentation generator for Ansible roles.
+This reusable GitHub Actions workflow automatically updates your `README.md` file using [`docsible`](https://github.com/melezhik/docsible).
 
 ### 🔧 Features / What it does?
 
