@@ -8,7 +8,7 @@ This repo contains the following reusable GitHub Workflows:
 
 <br>
 
-## 🚀 Build and Push Multi-Arch Docker Image (`docker-multiarch-build.yml`) <a name="dockermultiarchbuild"/>
+## Build and Push Multi-Arch Docker Image (`docker-multiarch-build.yml`) <a name="dockermultiarchbuild"/>
 
 This reusable GitHub Actions workflow builds and pushes multi-arch Docker images (AMD64 and ARM64) to Docker Hub. It supports automatic version tagging for main branch pushes and PR-based temporary tagging.
 
@@ -80,7 +80,7 @@ jobs:
 
 <br>
 
-## 🚀 Ansible Lint (`ansible-lint.yml`) <a name="ansiblelint"/>
+## Ansible Lint (`ansible-lint.yml`) <a name="ansiblelint"/>
 
 This reusable GitHub Actions workflow performs linting on your Ansible code using [`ansible-lint`](https://ansible-lint.readthedocs.io/).
 
@@ -111,7 +111,7 @@ jobs:
 
 <br>
 
-## 🚀 Auto-Update Ansible Roles README with "docsible" (`docsible.yml`) <a name="docsible"/>
+## Auto-Update Ansible Roles README with "docsible" (`docsible.yml`) <a name="docsible"/>
 
 This reusable GitHub Actions workflow automatically updates your `README.md` file using [`docsible`](https://github.com/melezhik/docsible), a documentation generator for Ansible roles.
 
