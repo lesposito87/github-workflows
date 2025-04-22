@@ -115,8 +115,6 @@ jobs:
 
 This reusable GitHub Actions workflow automatically updates your `README.md` file using [`docsible`](https://github.com/melezhik/docsible), a documentation generator for Ansible roles.
 
----
-
 ### 🔧 Features / What it does?
 
 - Checks out your repository.
